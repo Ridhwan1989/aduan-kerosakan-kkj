@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Aduan Kerosakan KK Jerantut</title>
+
+<style>
+*{box-sizing:border-box}body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;padding:20px;color:#1f2937}.wrap{max-width:920px;margin:auto;background:#fff;padding:24px;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08)}h1{margin:0;color:#0f766e;text-align:center;font-size:24px}h2{border-left:5px solid #0f766e;padding-left:10px;margin-top:24px;font-size:18px}label{font-weight:700;margin-top:14px;display:block}input,select,textarea{width:100%;padding:11px;margin-top:6px;border:1px solid #cbd5e1;border-radius:8px;font-size:15px}textarea{min-height:110px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.note{background:#ecfeff;border:1px solid #99f6e4;border-radius:10px;padding:12px;margin:15px 0}button{background:#0f766e;color:#fff;border:0;padding:13px 18px;border-radius:9px;font-size:16px;font-weight:700;cursor:pointer;margin-top:18px}button.secondary{background:#475569}button:disabled{background:#94a3b8;cursor:not-allowed}.small{font-size:13px;color:#64748b}.status{margin-top:15px;font-weight:700}.danger{color:#b91c1c}.ok{color:#047857}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.button-row{display:flex;gap:10px;flex-wrap:wrap}.btn-reset{background:#dc2626}.btn-reset:hover,.secondary:hover,button:hover{opacity:.92}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>SISTEM ADUAN KEROSAKAN BANGUNAN & KEBOCORAN PAIP</h1>
+<p style="text-align:center"><b>KOLEJ KOMUNITI JERANTUT</b></p>
+<div class="note"><b>Versi V10 Microsoft 365:</b> Borang disediakan untuk dihantar ke folder OneDrive/SharePoint melalui Power Automate, notifikasi e-mel kepada <b>asrimamat@kkjerantut.edu.my</b>, dan mesej WhatsApp kepada <b>019-9704140</b>. No. telefon pelapor boleh diedit jika terdapat perubahan nombor.</div>
+
+<form id="aduanForm">
+<h2>A. Maklumat Pelapor</h2>
+<div class="grid">
+<div><label>Nama Pelapor</label><select id="namaPelapor" required><option value="">-- Pilih Nama Pelapor --</option><option value="AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD">AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD</option>
+<option value="MOHD RIDHWAN BIN CHE’ AMAT">MOHD RIDHWAN BIN CHE’ AMAT</option>
+<option value="NORADILA BINTI AMRUN">NORADILA BINTI AMRUN</option>
+<option value="MOHD AZMAN BIN ROSLI">MOHD AZMAN BIN ROSLI</option>
+<option value="MOHD REDZWAN BIN ABDUL MUTALIB">MOHD REDZWAN BIN ABDUL MUTALIB</option>
+<option value="NORAIHAN BINTI AHMAD@MOHAMAD">NORAIHAN BINTI AHMAD@MOHAMAD</option>
+<option value="AHMAD SABRE BIN OSMAN">AHMAD SABRE BIN OSMAN</option>
+<option value="FARAH DIYANA BINTI MOHD AZMI">FARAH DIYANA BINTI MOHD AZMI</option>
+<option value="NUR LIYANA BINTI RUSLI">NUR LIYANA BINTI RUSLI</option>
+<option value="NOR FAUZIANA BINTI MOHD SALLEH">NOR FAUZIANA BINTI MOHD SALLEH</option>
+<option value="NUR ILYANA BINTI ABDULLAH">NUR ILYANA BINTI ABDULLAH</option>
+<option value="NOR AMALINA BINTI ABDULLAH">NOR AMALINA BINTI ABDULLAH</option>
+<option value="NURULIZZAH BINTI IDRIS">NURULIZZAH BINTI IDRIS</option>
+<option value="ZUBAYDAH BINTI MOHD YASIN">ZUBAYDAH BINTI MOHD YASIN</option>
+<option value="AININ FAIZAH BINTI ALIAS">AININ FAIZAH BINTI ALIAS</option>
+<option value="NURUL AFZA BINTI ABDUL MALIK">NURUL AFZA BINTI ABDUL MALIK</option>
+<option value="MOHD SAIFUL ZAIRY BIN MOHD ZAIDI">MOHD SAIFUL ZAIRY BIN MOHD ZAIDI</option>
+<option value="MUHAMMAD MUIZZULIHAB BIN MORSID">MUHAMMAD MUIZZULIHAB BIN MORSID</option>
+<option value="WAN NORDIANA BINTI WAN MOHD">WAN NORDIANA BINTI WAN MOHD</option>
+<option value="MAZLAN BIN HASHIM">MAZLAN BIN HASHIM</option>
+<option value="ASRI BIN MAMAT">ASRI BIN MAMAT</option>
+<option value="ROSILAH BINTI KHAIRUDIN">ROSILAH BINTI KHAIRUDIN</option>
+<option value="NORAHIZA BINTI FAKHRUDDIN">NORAHIZA BINTI FAKHRUDDIN</option>
+<option value="MOHD SHAHIDAN BIN MOHD ZAIN">MOHD SHAHIDAN BIN MOHD ZAIN</option>
+<option value="AZLINA BINTI ABDUL HALIM">AZLINA BINTI ABDUL HALIM</option>
+<option value="AZNI BINTI ZAINUN">AZNI BINTI ZAINUN</option>
+<option value="AZIZURANI BINTI AHMAD">AZIZURANI BINTI AHMAD</option>
+<option value="MUHAMAD NAZIMI BIN MAT SALEH">MUHAMAD NAZIMI BIN MAT SALEH</option>
+<option value="ROSNINA BINTI SAAD">ROSNINA BINTI SAAD</option></select></div>
+<div><label>No. Telefon Pelapor <span class="small">(boleh diedit jika nombor berubah)</span></label><input id="telefonPelapor" type="tel" required placeholder="Auto berdasarkan nama pelapor, boleh diedit"></div>
+</div>
+<label>Unit/Jabatan</label><select id="unit" required><option value="">-- Pilih Unit/Jabatan --</option><option>PENGURUSAN TERTINGGI</option><option>PENTADBIRAN</option><option>AKADEMIK</option><option>PEGAWAI KANAN</option></select>
+
+<h2>B. Maklumat Kerosakan</h2>
+<div class="grid">
+<div><label>Tarikh & Masa Laporan</label><input id="tarikhMasa" readonly></div>
+<div><label>Lokasi Kerosakan</label><input id="lokasi" required placeholder="Contoh: Tandas Blok Akademik"></div>
+</div>
+<div class="grid">
+<div><label>Jenis Kerosakan</label><select id="jenis" required><option value="">-- Pilih Jenis --</option><option>Kerosakan Bangunan</option><option>Kebocoran Paip</option><option>Elektrik</option><option>Perabot / Kemudahan</option><option>Lain-lain</option></select></div>
+<div><label>Tahap Keutamaan</label><select id="keutamaan" required><option value="">-- Pilih Tahap --</option><option>Rendah</option><option>Sederhana</option><option>Tinggi</option><option>Kritikal / Perlu Tindakan Segera</option></select></div>
+</div>
+<label>Keterangan Kerosakan</label><textarea id="keterangan" required placeholder="Nyatakan kerosakan dengan jelas dan ringkas"></textarea>
+<label>Gambar Kerosakan <span class="danger">(Wajib: JPG, JPEG atau PNG sahaja)</span></label><input type="file" id="gambar" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required><div class="small">Had cadangan: maksimum 2MB untuk penghantaran melalui EmailJS.</div>
+
+<h2>C. Pegawai Bertanggungjawab</h2>
+<div class="grid"><div><label>Nama Pegawai</label><input value="ASRI BIN MAMAT" readonly></div><div><label>Emel Pegawai</label><input value="asrimamat@kkjerantut.edu.my" readonly></div></div>
+<div class="button-row"><button id="btnHantar" type="submit">Hantar Laporan Ke OneDrive & Notifikasi Pegawai</button><button id="btnReset" type="button" class="btn-reset">Reset Borang</button><button type="button" class="secondary" onclick="window.print()">Cetak Borang</button></div>
+<div id="status" class="status"></div>
+</form>
+</div>
+<script>
+// ===== TETAPAN UTAMA =====
+// 1. Cipta Power Automate Flow menggunakan HTTP trigger.
+// 2. Salin HTTP POST URL dan tampal di bawah.
+const WEB_APP_URL = "https://default1a5cd4bd94d94002bc0a098a1ffe28.91.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/b03dfe82be0c4ac7a6ec3e538e3c9790/triggers/manual/paths/invoke?api-version=1";
+const EMAIL_PEGAWAI = "asrimamat@kkjerantut.edu.my";
+const WHATSAPP_PEGAWAI = "60199704140";
+
+const telefonMap = {"AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD": "017-7101571",
+"MOHD RIDHWAN BIN CHE’ AMAT": "019-6018853",
+"NORADILA BINTI AMRUN": "017-2762390",
+"MOHD AZMAN BIN ROSLI": "019-3535082",
+"MOHD REDZWAN BIN ABDUL MUTALIB": "010-3177699",
+"NORAIHAN BINTI AHMAD@MOHAMAD": "019-3542179",
+"AHMAD SABRE BIN OSMAN": "017-6015452",
+"FARAH DIYANA BINTI MOHD AZMI": "013-4873389",
+"NUR LIYANA BINTI RUSLI": "019-9871701",
+"NOR FAUZIANA BINTI MOHD SALLEH": "012-6733585",
+"NUR ILYANA BINTI ABDULLAH": "012-7361975",
+"NOR AMALINA BINTI ABDULLAH": "013-3222914",
+"NURULIZZAH BINTI IDRIS": "0172517746",
+"ZUBAYDAH BINTI MOHD YASIN": "010-2970696",
+"AININ FAIZAH BINTI ALIAS": "013-9328536",
+"NURUL AFZA BINTI ABDUL MALIK": "011-28836414",
+"MOHD SAIFUL ZAIRY BIN MOHD ZAIDI": "013-4728744",
+"MUHAMMAD MUIZZULIHAB BIN MORSID": "018-2898874",
+"WAN NORDIANA BINTI WAN MOHD": "012-3467705",
+"MAZLAN BIN HASHIM": "017-9385538",
+"ASRI BIN MAMAT": "019-9704140",
+"ROSILAH BINTI KHAIRUDIN": "016-2068654",
+"NORAHIZA BINTI FAKHRUDDIN": "017-9627236",
+"MOHD SHAHIDAN BIN MOHD ZAIN": "013-9202161",
+"AZLINA BINTI ABDUL HALIM": "011-14587720",
+"AZNI BINTI ZAINUN": "013-9285812",
+"AZIZURANI BINTI AHMAD": "017-3022469",
+"MUHAMAD NAZIMI BIN MAT SALEH": "013-9709982",
+"ROSNINA BINTI SAAD": "014-2104022"};
+
+function nowMY(){ return new Date().toLocaleString('ms-MY',{dateStyle:'medium',timeStyle:'short'}); }
+document.getElementById('tarikhMasa').value = nowMY();
+document.getElementById('namaPelapor').addEventListener('change', e=>{
+ const telefonInput = document.getElementById('telefonPelapor');
+ telefonInput.value = telefonMap[e.target.value] || '';
+ telefonInput.focus();
+});
+document.getElementById('gambar').addEventListener('change', function(){
+ const f=this.files[0]; if(!f)return; const ok=['image/jpeg','image/png'];
+ if(!ok.includes(f.type)){alert('Sila muat naik gambar dalam format JPG, JPEG atau PNG sahaja.'); this.value=''; return;}
+ if(f.size > 8*1024*1024){alert('Saiz gambar melebihi 8MB. Sila kecilkan gambar dahulu.'); this.value='';}
+});
+function toBase64(file){return new Promise((res,rej)=>{const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file);})}
+function bukaWhatsAppRingkas(data, linkDrive){
+ const msg = `ADUAN KEROSAKAN KKJ%0A`+
+ `Pelapor: ${encodeURIComponent(data.nama_pelapor)}%0A`+
+ `Telefon: ${encodeURIComponent(data.telefon_pelapor)}%0A`+
+ `Unit: ${encodeURIComponent(data.unit)}%0A`+
+ `Lokasi: ${encodeURIComponent(data.lokasi)}%0A`+
+ `Keutamaan: ${encodeURIComponent(data.keutamaan)}%0A`+
+ `Pautan laporan/gambar: ${encodeURIComponent(linkDrive || 'Rujuk OneDrive/SharePoint')}`;
+ window.open(`https://wa.me/${WHATSAPP_PEGAWAI}?text=${msg}`, '_blank');
+}
+
+function resetBorangPenuh(){
+ if(confirm('Adakah anda pasti ingin mengosongkan semua maklumat dalam borang ini?')){
+  document.getElementById('aduanForm').reset();
+  document.getElementById('gambar').value='';
+  document.getElementById('telefonPelapor').value='';
+  document.getElementById('tarikhMasa').value=nowMY();
+  document.getElementById('status').innerHTML='';
+  document.getElementById('namaPelapor').focus();
+ }
+}
+document.getElementById('btnReset').addEventListener('click', resetBorangPenuh);
+
+
+document.getElementById('aduanForm').addEventListener('submit', async function(e){
+ e.preventDefault(); const status=document.getElementById('status'); const btn=document.getElementById('btnHantar');
+ if(WEB_APP_URL.includes('MASUKKAN_URL')){status.innerHTML='<span class="danger">Sila tetapkan URL Power Automate dahulu. Rujuk PANDUAN_MICROSOFT_365_V10.txt.</span>'; return;}
+ const file=document.getElementById('gambar').files[0]; if(!file){alert('Sila muat naik gambar kerosakan.'); return;}
+ btn.disabled=true; status.textContent='Sedang menghantar laporan ke OneDrive/SharePoint dan e-mel pegawai...';
+ try{ const img=await toBase64(file);
+ const data={
+  tarikh_masa:document.getElementById('tarikhMasa').value,
+  nama_pelapor:document.getElementById('namaPelapor').value,
+  telefon_pelapor:document.getElementById('telefonPelapor').value,
+  unit:document.getElementById('unit').value,
+  lokasi:document.getElementById('lokasi').value,
+  jenis:document.getElementById('jenis').value,
+  keutamaan:document.getElementById('keutamaan').value,
+  keterangan:document.getElementById('keterangan').value,
+  nama_pegawai:'ASRI BIN MAMAT', emel_pegawai:EMAIL_PEGAWAI, no_pegawai:'019-9704140',
+  gambar_name:file.name, gambar_type:file.type, gambar_base64:img
+ };
+ const res = await fetch(WEB_APP_URL, {method:'POST', body:JSON.stringify(data)});
+ const text = await res.text();
+ let result; try{ result=JSON.parse(text); }catch(_){ result={ok:false,message:text}; }
+ if(!result.ok){ throw new Error(result.message || 'Gagal menghantar laporan.'); }
+ status.innerHTML='<span class="ok">Laporan berjaya dihantar ke OneDrive/SharePoint dan notifikasi e-mel pegawai telah dijana. Tetingkap WhatsApp akan dibuka untuk mesej pegawai.</span>';
+ bukaWhatsAppRingkas(data, result.folderUrl || result.reportUrl || result.imageUrl);
+ this.reset(); document.getElementById('tarikhMasa').value=nowMY();
+ }catch(err){console.error(err); status.innerHTML='<span class="danger">Gagal menghantar laporan. Semak URL Power Automate, kebenaran Microsoft 365 dan sambungan internet.</span>';}
+ finally{btn.disabled=false;}
+});
+</script>
+</body>
+</html>
