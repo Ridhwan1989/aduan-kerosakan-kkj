@@ -1,42 +1,468 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistem Aduan Kerosakan KK Jerantut</title>
-<style>
-*{box-sizing:border-box}body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;padding:20px;color:#1f2937}.wrap{max-width:920px;margin:auto;background:#fff;padding:24px;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08)}h1{margin:0;color:#0f766e;text-align:center;font-size:24px}h2{border-left:5px solid #0f766e;padding-left:10px;margin-top:24px;font-size:18px}label{font-weight:700;margin-top:14px;display:block}input,select,textarea{width:100%;padding:11px;margin-top:6px;border:1px solid #cbd5e1;border-radius:8px;font-size:15px}textarea{min-height:110px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.note{background:#ecfeff;border:1px solid #99f6e4;border-radius:10px;padding:12px;margin:15px 0}button{background:#0f766e;color:#fff;border:0;padding:13px 18px;border-radius:9px;font-size:16px;font-weight:700;cursor:pointer;margin-top:18px}button.secondary{background:#475569}button:disabled{background:#94a3b8;cursor:not-allowed}.small{font-size:13px;color:#64748b}.status{margin-top:15px;font-weight:700}.danger{color:#b91c1c}.ok{color:#047857}@media(max-width:700px){.grid{grid-template-columns:1fr}}.button-row{display:flex;gap:10px;flex-wrap:wrap}.btn-reset{background:#dc2626}.btn-reset:hover,.secondary:hover,button:hover{opacity:.92}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Aduan Kerosakan KK Jerantut</title>
+  <meta name="theme-color" content="#0f766e">
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --primary:#0f766e; --primary2:#115e59; --bg:#f3f7f7; --card:#fff;
+      --text:#1f2937; --muted:#64748b; --border:#cbd5e1; --danger:#b91c1c;
+      --ok:#047857; --warn:#92400e;
+    }
+    body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);margin:0;padding:18px;color:var(--text)}
+    .wrap{max-width:980px;margin:auto;background:var(--card);padding:26px;border-radius:16px;box-shadow:0 5px 22px rgba(0,0,0,.08)}
+    .brand{text-align:center;border-bottom:1px solid #e2e8f0;padding-bottom:18px}
+    .brand .icon{font-size:40px}
+    h1{margin:6px 0;color:var(--primary);font-size:25px;line-height:1.25}
+    .subtitle{margin:5px 0;font-weight:700}
+    .tag{display:inline-block;background:#ccfbf1;color:#115e59;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-top:4px}
+    h2{border-left:5px solid var(--primary);padding-left:10px;margin:26px 0 8px;font-size:18px}
+    label{font-weight:700;margin-top:14px;display:block}
+    input,select,textarea{
+      width:100%;padding:12px;margin-top:6px;border:1px solid var(--border);
+      border-radius:9px;font-size:15px;background:#fff;color:var(--text)
+    }
+    input:focus,select:focus,textarea:focus{outline:2px solid #99f6e4;border-color:var(--primary)}
+    textarea{min-height:120px;resize:vertical}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .note{background:#ecfeff;border:1px solid #99f6e4;border-radius:10px;padding:13px;margin:16px 0;line-height:1.45}
+    .small{font-size:13px;color:var(--muted);line-height:1.45}
+    .required{color:var(--danger)}
+    .optional{color:var(--muted);font-weight:400}
+    .manual-name{display:none}
+    .preview-wrap{display:none;margin-top:10px}
+    .preview{max-width:240px;max-height:200px;border-radius:10px;border:1px solid #ddd;object-fit:cover}
+    .button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    button{background:var(--primary);color:#fff;border:0;padding:13px 18px;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer}
+    button:hover{opacity:.92}
+    button:disabled{background:#94a3b8;cursor:not-allowed}
+    .secondary{background:#475569}
+    .danger-btn{background:#dc2626}
+    .status{margin-top:16px;font-weight:700;line-height:1.45}
+    .ok{color:var(--ok)}
+    .danger{color:var(--danger)}
+    .warn{color:var(--warn)}
+    .receipt{display:none;margin-top:18px;padding:16px;border:1px solid #86efac;background:#f0fdf4;border-radius:12px}
+    .receipt strong{color:#065f46}
+    footer{text-align:center;color:var(--muted);font-size:12px;margin-top:26px;padding-top:14px;border-top:1px solid #e2e8f0}
+    iframe[name="gasFrame"]{display:none}
+    @media(max-width:700px){
+      body{padding:8px}.wrap{padding:17px;border-radius:10px}.grid{grid-template-columns:1fr}
+      h1{font-size:21px}.button-row button{width:100%}
+    }
+    @media print{
+      body{background:#fff;padding:0}.wrap{box-shadow:none;max-width:none;padding:0}
+      .button-row,.note,.preview-wrap footer{display:none!important}
+      input,select,textarea{border:0;padding:3px 0;appearance:none}
+      .receipt{display:block}
+    }
+  </style>
 </head>
 <body>
 <div class="wrap">
-<h1>SISTEM ADUAN KEROSAKAN BANGUNAN & KEBOCORAN PAIP</h1>
-<p style="text-align:center"><b>KOLEJ KOMUNITI JERANTUT</b></p>
-<div class="note"><b>Versi EmailJS:</b> Borang ini boleh dibuka melalui QR/GitHub Pages tanpa sign in dan menghantar emel kepada <b>asrimamat@kkjerantut.edu.my</b>.</div>
-<form id="aduanForm" enctype="multipart/form-data">
-<h2>A. Maklumat Pelapor</h2>
-<div class="grid"><div><label>Nama Pelapor</label><select id="namaPelapor" name="nama" required><option value="">-- Pilih Nama Pelapor --</option>
-<option value="AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD">AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD</option><option value="MOHD RIDHWAN BIN CHE’ AMAT">MOHD RIDHWAN BIN CHE’ AMAT</option><option value="NORADILA BINTI AMRUN">NORADILA BINTI AMRUN</option><option value="MOHD AZMAN BIN ROSLI">MOHD AZMAN BIN ROSLI</option><option value="MOHD REDZWAN BIN ABDUL MUTALIB">MOHD REDZWAN BIN ABDUL MUTALIB</option><option value="NORAIHAN BINTI AHMAD@MOHAMAD">NORAIHAN BINTI AHMAD@MOHAMAD</option><option value="AHMAD SABRE BIN OSMAN">AHMAD SABRE BIN OSMAN</option><option value="FARAH DIYANA BINTI MOHD AZMI">FARAH DIYANA BINTI MOHD AZMI</option><option value="NUR LIYANA BINTI RUSLI">NUR LIYANA BINTI RUSLI</option><option value="NOR FAUZIANA BINTI MOHD SALLEH">NOR FAUZIANA BINTI MOHD SALLEH</option><option value="NUR ILYANA BINTI ABDULLAH">NUR ILYANA BINTI ABDULLAH</option><option value="NOR AMALINA BINTI ABDULLAH">NOR AMALINA BINTI ABDULLAH</option><option value="NURULIZZAH BINTI IDRIS">NURULIZZAH BINTI IDRIS</option><option value="ZUBAYDAH BINTI MOHD YASIN">ZUBAYDAH BINTI MOHD YASIN</option><option value="AININ FAIZAH BINTI ALIAS">AININ FAIZAH BINTI ALIAS</option><option value="NURUL AFZA BINTI ABDUL MALIK">NURUL AFZA BINTI ABDUL MALIK</option><option value="MOHD SAIFUL ZAIRY BIN MOHD ZAIDI">MOHD SAIFUL ZAIRY BIN MOHD ZAIDI</option><option value="MUHAMMAD MUIZZULIHAB BIN MORSID">MUHAMMAD MUIZZULIHAB BIN MORSID</option><option value="WAN NORDIANA BINTI WAN MOHD">WAN NORDIANA BINTI WAN MOHD</option><option value="MAZLAN BIN HASHIM">MAZLAN BIN HASHIM</option><option value="ASRI BIN MAMAT">ASRI BIN MAMAT</option><option value="ROSILAH BINTI KHAIRUDIN">ROSILAH BINTI KHAIRUDIN</option><option value="NORAHIZA BINTI FAKHRUDDIN">NORAHIZA BINTI FAKHRUDDIN</option><option value="MOHD SHAHIDAN BIN MOHD ZAIN">MOHD SHAHIDAN BIN MOHD ZAIN</option><option value="AZLINA BINTI ABDUL HALIM">AZLINA BINTI ABDUL HALIM</option><option value="AZNI BINTI ZAINUN">AZNI BINTI ZAINUN</option><option value="AZIZURANI BINTI AHMAD">AZIZURANI BINTI AHMAD</option><option value="MUHAMAD NAZIMI BIN MAT SALEH">MUHAMAD NAZIMI BIN MAT SALEH</option><option value="ROSNINA BINTI SAAD">ROSNINA BINTI SAAD</option>
-</select></div><div><label>No. Telefon Pelapor <span class="small">(boleh diedit)</span></label><input id="telefonPelapor" name="telefon" type="tel" required></div></div>
-<label>Unit/Jabatan</label><select id="unit" name="unit" required><option value="">-- Pilih Unit/Jabatan --</option><option>PENGURUSAN TERTINGGI</option><option>PENTADBIRAN</option><option>AKADEMIK</option><option>PEGAWAI KANAN</option></select>
-<h2>B. Maklumat Kerosakan</h2>
-<div class="grid"><div><label>Tarikh & Masa Laporan</label><input id="tarikhMasa" name="tarikh" readonly></div><div><label>Lokasi Kerosakan</label><input id="lokasi" name="lokasi" required placeholder="Contoh: Tandas Blok Akademik"></div></div>
-<div class="grid"><div><label>Jenis Kerosakan</label><select id="jenis" name="jenis" required><option value="">-- Pilih Jenis --</option><option>Kerosakan Bangunan</option><option>Kebocoran Paip</option><option>Elektrik</option><option>Perabot / Kemudahan</option><option>Lain-lain</option></select></div><div><label>Tahap Keutamaan</label><select id="keutamaan" name="keutamaan" required><option value="">-- Pilih Tahap --</option><option>Rendah</option><option>Sederhana</option><option>Tinggi</option><option>Kritikal / Perlu Tindakan Segera</option></select></div></div>
-<label>Keterangan Kerosakan</label><textarea id="keterangan" name="keterangan" required></textarea>
-<label>Gambar Kerosakan <span class="danger">(JPG/JPEG/PNG)</span></label><input type="file" id="gambar"  accept=".jpg,.jpeg,.png,image/jpeg,image/png" ><div class="small">Gambar adalah untuk rujukan sahaja. Lampiran gambar melalui emel belum diaktifkan.</div>
-<h2>C. Pegawai Bertanggungjawab</h2><div class="grid"><div><label>Nama Pegawai</label><input value="ASRI BIN MAMAT" readonly></div><div><label>Emel Pegawai</label><input name="to_email" value="asrimamat@kkjerantut.edu.my" readonly></div></div>
-<div class="button-row"><button id="btnHantar" type="submit">Hantar Laporan</button><button id="btnReset" type="button" class="btn-reset">Reset Borang</button><button type="button" class="secondary" onclick="window.print()">Cetak Borang</button></div><div id="status" class="status"></div>
-</form></div>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <div class="brand">
+    <div class="icon">🛠️</div>
+    <h1>SISTEM ADUAN KEROSAKAN BANGUNAN & KEBOCORAN PAIP</h1>
+    <div class="subtitle">KOLEJ KOMUNITI JERANTUT</div>
+    <div class="tag">BORANG DIGITAL • MESRA TELEFON • TANPA SIGN IN</div>
+  </div>
+
+  <div class="note">
+    <b>Makluman:</b> Gambar kerosakan adalah <b>tidak wajib</b>. Jika disertakan, gambar akan dikecilkan secara automatik sebelum dihantar dan disimpan ke Google Drive.
+  </div>
+
+  <form id="aduanForm">
+    <h2>A. Maklumat Pelapor</h2>
+
+    <div class="grid">
+      <div>
+        <label>Nama Pelapor <span class="required">*</span></label>
+        <select id="namaPelapor" required>
+          <option value="">-- Pilih Nama Pelapor --</option>
+          <option value="AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD">AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD</option>
+          <option value="MOHD RIDHWAN BIN CHE’ AMAT">MOHD RIDHWAN BIN CHE’ AMAT</option>
+          <option value="NORADILA BINTI AMRUN">NORADILA BINTI AMRUN</option>
+          <option value="MOHD AZMAN BIN ROSLI">MOHD AZMAN BIN ROSLI</option>
+          <option value="MOHD REDZWAN BIN ABDUL MUTALIB">MOHD REDZWAN BIN ABDUL MUTALIB</option>
+          <option value="NORAIHAN BINTI AHMAD@MOHAMAD">NORAIHAN BINTI AHMAD@MOHAMAD</option>
+          <option value="AHMAD SABRE BIN OSMAN">AHMAD SABRE BIN OSMAN</option>
+          <option value="FARAH DIYANA BINTI MOHD AZMI">FARAH DIYANA BINTI MOHD AZMI</option>
+          <option value="NUR LIYANA BINTI RUSLI">NUR LIYANA BINTI RUSLI</option>
+          <option value="NOR FAUZIANA BINTI MOHD SALLEH">NOR FAUZIANA BINTI MOHD SALLEH</option>
+          <option value="NUR ILYANA BINTI ABDULLAH">NUR ILYANA BINTI ABDULLAH</option>
+          <option value="NOR AMALINA BINTI ABDULLAH">NOR AMALINA BINTI ABDULLAH</option>
+          <option value="NURULIZZAH BINTI IDRIS">NURULIZZAH BINTI IDRIS</option>
+          <option value="ZUBAYDAH BINTI MOHD YASIN">ZUBAYDAH BINTI MOHD YASIN</option>
+          <option value="AININ FAIZAH BINTI ALIAS">AININ FAIZAH BINTI ALIAS</option>
+          <option value="NURUL AFZA BINTI ABDUL MALIK">NURUL AFZA BINTI ABDUL MALIK</option>
+          <option value="MOHD SAIFUL ZAIRY BIN MOHD ZAIDI">MOHD SAIFUL ZAIRY BIN MOHD ZAIDI</option>
+          <option value="MUHAMMAD MUIZZULIHAB BIN MORSID">MUHAMMAD MUIZZULIHAB BIN MORSID</option>
+          <option value="WAN NORDIANA BINTI WAN MOHD">WAN NORDIANA BINTI WAN MOHD</option>
+          <option value="MAZLAN BIN HASHIM">MAZLAN BIN HASHIM</option>
+          <option value="ASRI BIN MAMAT">ASRI BIN MAMAT</option>
+          <option value="ROSILAH BINTI KHAIRUDIN">ROSILAH BINTI KHAIRUDIN</option>
+          <option value="NORAHIZA BINTI FAKHRUDDIN">NORAHIZA BINTI FAKHRUDDIN</option>
+          <option value="MOHD SHAHIDAN BIN MOHD ZAIN">MOHD SHAHIDAN BIN MOHD ZAIN</option>
+          <option value="AZLINA BINTI ABDUL HALIM">AZLINA BINTI ABDUL HALIM</option>
+          <option value="AZNI BINTI ZAINUN">AZNI BINTI ZAINUN</option>
+          <option value="AZIZURANI BINTI AHMAD">AZIZURANI BINTI AHMAD</option>
+          <option value="MUHAMAD NAZIMI BIN MAT SALEH">MUHAMAD NAZIMI BIN MAT SALEH</option>
+          <option value="ROSNINA BINTI SAAD">ROSNINA BINTI SAAD</option>
+          <option value="__LAIN__">➕ Nama tiada dalam senarai / Isi manual</option>
+        </select>
+
+        <div id="manualNameWrap" class="manual-name">
+          <label>Nama Pelapor (Manual) <span class="required">*</span></label>
+          <input id="namaManual" type="text" placeholder="Taip nama penuh">
+        </div>
+      </div>
+
+      <div>
+        <label>No. Telefon Pelapor <span class="required">*</span> <span class="small">(boleh diedit)</span></label>
+        <input id="telefonPelapor" type="tel" required placeholder="Contoh: 019-1234567">
+      </div>
+    </div>
+
+    <label>Unit/Jabatan <span class="required">*</span></label>
+    <select id="unit" required>
+      <option value="">-- Pilih Unit/Jabatan --</option>
+      <option>PENGURUSAN TERTINGGI</option>
+      <option>PENTADBIRAN</option>
+      <option>AKADEMIK</option>
+      <option>PEGAWAI KANAN</option>
+      <option>LAIN-LAIN</option>
+    </select>
+
+    <h2>B. Maklumat Kerosakan</h2>
+
+    <div class="grid">
+      <div>
+        <label>Tarikh & Masa Laporan</label>
+        <input id="tarikhMasa" readonly>
+      </div>
+      <div>
+        <label>Lokasi Kerosakan <span class="required">*</span></label>
+        <input id="lokasi" required placeholder="Contoh: Tandas Blok Akademik">
+      </div>
+    </div>
+
+    <div class="grid">
+      <div>
+        <label>Jenis Kerosakan <span class="required">*</span></label>
+        <select id="jenis" required>
+          <option value="">-- Pilih Jenis --</option>
+          <option>Kerosakan Bangunan</option>
+          <option>Kebocoran Paip</option>
+          <option>Elektrik</option>
+          <option>Perabot / Kemudahan</option>
+          <option>Penghawa Dingin</option>
+          <option>ICT / Rangkaian</option>
+          <option>Lain-lain</option>
+        </select>
+      </div>
+      <div>
+        <label>Tahap Keutamaan <span class="required">*</span></label>
+        <select id="keutamaan" required>
+          <option value="">-- Pilih Tahap --</option>
+          <option>Rendah</option>
+          <option>Sederhana</option>
+          <option>Tinggi</option>
+          <option>Kritikal / Perlu Tindakan Segera</option>
+        </select>
+      </div>
+    </div>
+
+    <label>Keterangan Kerosakan <span class="required">*</span></label>
+    <textarea id="keterangan" required placeholder="Terangkan kerosakan dengan ringkas tetapi jelas."></textarea>
+
+    <label>Gambar Kerosakan <span class="optional">(pilihan / tidak wajib)</span></label>
+    <input type="file" id="gambar" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+    <div class="small">Format: JPG/JPEG/PNG. Maksimum asal 8MB. Sistem akan mengecilkan gambar secara automatik sebelum dihantar.</div>
+    <div id="previewWrap" class="preview-wrap"><img id="preview" class="preview" alt="Pratonton gambar"></div>
+
+    <h2>C. Pegawai Bertanggungjawab</h2>
+    <div class="grid">
+      <div>
+        <label>Nama Pegawai</label>
+        <input id="namaPegawai" value="ASRI BIN MAMAT" readonly>
+      </div>
+      <div>
+        <label>Emel Pegawai</label>
+        <input id="emailPegawai" value="asrimamat@kkjerantut.edu.my" readonly>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button id="btnHantar" type="submit">📨 Hantar Laporan</button>
+      <button id="btnReset" type="button" class="danger-btn">🔄 Reset Borang</button>
+      <button type="button" class="secondary" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div id="receipt" class="receipt">
+      <div>✅ <strong>Laporan berjaya direkodkan.</strong></div>
+      <div style="margin-top:6px">No. Aduan: <strong id="receiptId"></strong></div>
+      <div class="small" style="margin-top:6px">Sila simpan nombor aduan ini untuk rujukan.</div>
+    </div>
+  </form>
+
+  <footer>
+    Sistem Aduan Kerosakan • Kolej Komuniti Jerantut
+  </footer>
+</div>
+
+<iframe name="gasFrame" id="gasFrame"></iframe>
+
+<form id="gasPostForm" method="POST" target="gasFrame" style="display:none"></form>
+
 <script>
-emailjs.init({publicKey:"dCUgBgaKJZL5kggcf"});
-const SERVICE_ID="service_sj9hcit", TEMPLATE_ID="template_ffw4tzr";
-const telefonMap={"AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD":"017-7101571","MOHD RIDHWAN BIN CHE’ AMAT":"019-6018853","NORADILA BINTI AMRUN":"017-2762390","MOHD AZMAN BIN ROSLI":"019-3535082","MOHD REDZWAN BIN ABDUL MUTALIB":"010-3177699","NORAIHAN BINTI AHMAD@MOHAMAD":"019-3542179","AHMAD SABRE BIN OSMAN":"017-6015452","FARAH DIYANA BINTI MOHD AZMI":"013-4873389","NUR LIYANA BINTI RUSLI":"019-9871701","NOR FAUZIANA BINTI MOHD SALLEH":"012-6733585","NUR ILYANA BINTI ABDULLAH":"012-7361975","NOR AMALINA BINTI ABDULLAH":"013-3222914","NURULIZZAH BINTI IDRIS":"0172517746","ZUBAYDAH BINTI MOHD YASIN":"010-2970696","AININ FAIZAH BINTI ALIAS":"013-9328536","NURUL AFZA BINTI ABDUL MALIK":"011-28836414","MOHD SAIFUL ZAIRY BIN MOHD ZAIDI":"013-4728744","MUHAMMAD MUIZZULIHAB BIN MORSID":"018-2898874","WAN NORDIANA BINTI WAN MOHD":"012-3467705","MAZLAN BIN HASHIM":"017-9385538","ASRI BIN MAMAT":"019-9704140","ROSILAH BINTI KHAIRUDIN":"016-2068654","NORAHIZA BINTI FAKHRUDDIN":"017-9627236","MOHD SHAHIDAN BIN MOHD ZAIN":"013-9202161","AZLINA BINTI ABDUL HALIM":"011-14587720","AZNI BINTI ZAINUN":"013-9285812","AZIZURANI BINTI AHMAD":"017-3022469","MUHAMAD NAZIMI BIN MAT SALEH":"013-9709982","ROSNINA BINTI SAAD":"014-2104022"};
-function nowMY(){return new Date().toLocaleString('ms-MY',{dateStyle:'medium',timeStyle:'short'});}
-document.getElementById('tarikhMasa').value=nowMY();
-document.getElementById('namaPelapor').addEventListener('change',e=>{document.getElementById('telefonPelapor').value=telefonMap[e.target.value]||'';});
-document.getElementById('gambar').addEventListener('change',function(){const f=this.files[0]; if(!f)return; if(!['image/jpeg','image/png'].includes(f.type)){alert('Sila muat naik JPG, JPEG atau PNG sahaja.');this.value='';return;} if(f.size>2*1024*1024){alert('Saiz gambar melebihi 2MB. Sila kecilkan gambar dahulu.');this.value='';}});
-document.getElementById('btnReset').addEventListener('click',function(){if(confirm('Kosongkan borang?')){document.getElementById('aduanForm').reset();document.getElementById('tarikhMasa').value=nowMY();document.getElementById('status').innerHTML='';}});
-document.getElementById('aduanForm').addEventListener('submit',function(e){e.preventDefault();const status=document.getElementById('status'),btn=document.getElementById('btnHantar');btn.disabled=true;status.textContent='Sedang menghantar laporan...';emailjs.sendForm(SERVICE_ID,TEMPLATE_ID,this).then(()=>{status.innerHTML='<span class="ok">Laporan berjaya dihantar kepada pegawai bertanggungjawab.</span>';this.reset();document.getElementById('tarikhMasa').value=nowMY();}).catch(err=>{console.error(err);status.innerHTML='<span class="danger">Gagal menghantar laporan. Semak tetapan EmailJS atau sambungan internet.</span>';}).finally(()=>btn.disabled=false);});
+  // ============================================================
+  // LANGKAH WAJIB:
+  // Gantikan URL di bawah dengan URL Web App Google Apps Script.
+  // Contoh: https://script.google.com/macros/s/AKfycbxxxx/exec
+  // ============================================================
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbxuS1ylWJxA8gFvjfTPSv_H28T7wfvKFYR2JiowRUYvBDee5_uAHK1QNY-VRATT2vrFsw/exec";
+
+  const telefonMap = {
+    "AZAD MUSLIM BIN MUHAMMAD@MOHAMMAD":"017-7101571",
+    "MOHD RIDHWAN BIN CHE’ AMAT":"019-6018853",
+    "NORADILA BINTI AMRUN":"017-2762390",
+    "MOHD AZMAN BIN ROSLI":"019-3535082",
+    "MOHD REDZWAN BIN ABDUL MUTALIB":"010-3177699",
+    "NORAIHAN BINTI AHMAD@MOHAMAD":"019-3542179",
+    "AHMAD SABRE BIN OSMAN":"017-6015452",
+    "FARAH DIYANA BINTI MOHD AZMI":"013-4873389",
+    "NUR LIYANA BINTI RUSLI":"019-9871701",
+    "NOR FAUZIANA BINTI MOHD SALLEH":"012-6733585",
+    "NUR ILYANA BINTI ABDULLAH":"012-7361975",
+    "NOR AMALINA BINTI ABDULLAH":"013-3222914",
+    "NURULIZZAH BINTI IDRIS":"0172517746",
+    "ZUBAYDAH BINTI MOHD YASIN":"010-2970696",
+    "AININ FAIZAH BINTI ALIAS":"013-9328536",
+    "NURUL AFZA BINTI ABDUL MALIK":"011-28836414",
+    "MOHD SAIFUL ZAIRY BIN MOHD ZAIDI":"013-4728744",
+    "MUHAMMAD MUIZZULIHAB BIN MORSID":"018-2898874",
+    "WAN NORDIANA BINTI WAN MOHD":"012-3467705",
+    "MAZLAN BIN HASHIM":"017-9385538",
+    "ASRI BIN MAMAT":"019-9704140",
+    "ROSILAH BINTI KHAIRUDIN":"016-2068654",
+    "NORAHIZA BINTI FAKHRUDDIN":"017-9627236",
+    "MOHD SHAHIDAN BIN MOHD ZAIN":"013-9202161",
+    "AZLINA BINTI ABDUL HALIM":"011-14587720",
+    "AZNI BINTI ZAINUN":"013-9285812",
+    "AZIZURANI BINTI AHMAD":"017-3022469",
+    "MUHAMAD NAZIMI BIN MAT SALEH":"013-9709982",
+    "ROSNINA BINTI SAAD":"014-2104022"
+  };
+
+  const el = id => document.getElementById(id);
+  let isSubmitting = false;
+
+  function nowMY(){
+    return new Date().toLocaleString('ms-MY',{
+      timeZone:'Asia/Kuala_Lumpur',
+      dateStyle:'medium',
+      timeStyle:'short'
+    });
+  }
+
+  function generateAduanId(){
+    const d = new Date();
+    const f = new Intl.DateTimeFormat('en-CA',{
+      timeZone:'Asia/Kuala_Lumpur',year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false
+    }).formatToParts(d).reduce((a,p)=>(a[p.type]=p.value,a),{});
+    return `KKJ-${f.year}${f.month}${f.day}-${f.hour}${f.minute}${f.second}`;
+  }
+
+  function selectedNama(){
+    return el('namaPelapor').value === '__LAIN__'
+      ? el('namaManual').value.trim()
+      : el('namaPelapor').value;
+  }
+
+  function setStatus(msg, cls=''){
+    el('status').className='status ' + cls;
+    el('status').textContent=msg;
+  }
+
+  function addHidden(form, name, value){
+    const input=document.createElement('input');
+    input.type='hidden'; input.name=name; input.value=value ?? '';
+    form.appendChild(input);
+  }
+
+  async function compressImage(file){
+    if(!file) return {data:'', name:'', type:''};
+    if(file.size > 8*1024*1024) throw new Error('Saiz gambar melebihi 8MB.');
+
+    const dataURL = await new Promise((resolve,reject)=>{
+      const r=new FileReader();
+      r.onload=()=>resolve(r.result);
+      r.onerror=reject;
+      r.readAsDataURL(file);
+    });
+
+    const img = await new Promise((resolve,reject)=>{
+      const i=new Image();
+      i.onload=()=>resolve(i);
+      i.onerror=reject;
+      i.src=dataURL;
+    });
+
+    const maxSide=1600;
+    let w=img.width, h=img.height;
+    if(Math.max(w,h)>maxSide){
+      const ratio=maxSide/Math.max(w,h);
+      w=Math.round(w*ratio); h=Math.round(h*ratio);
+    }
+
+    const canvas=document.createElement('canvas');
+    canvas.width=w; canvas.height=h;
+    canvas.getContext('2d').drawImage(img,0,0,w,h);
+
+    const compressed=canvas.toDataURL('image/jpeg',0.78);
+    const safeName=(file.name.replace(/\.[^.]+$/,'') || 'gambar_kerosakan') + '.jpg';
+    return {data:compressed, name:safeName, type:'image/jpeg'};
+  }
+
+  el('tarikhMasa').value=nowMY();
+
+  el('namaPelapor').addEventListener('change',e=>{
+    const isManual=e.target.value==='__LAIN__';
+    el('manualNameWrap').style.display=isManual?'block':'none';
+    el('namaManual').required=isManual;
+    if(isManual){
+      el('telefonPelapor').value='';
+      setTimeout(()=>el('namaManual').focus(),50);
+    }else{
+      el('telefonPelapor').value=telefonMap[e.target.value]||'';
+    }
+  });
+
+  el('gambar').addEventListener('change',function(){
+    const f=this.files[0];
+    if(!f){el('previewWrap').style.display='none';return;}
+    if(!['image/jpeg','image/png'].includes(f.type)){
+      alert('Sila muat naik JPG, JPEG atau PNG sahaja.');
+      this.value=''; el('previewWrap').style.display='none'; return;
+    }
+    if(f.size>8*1024*1024){
+      alert('Saiz gambar melebihi 8MB. Sila pilih gambar yang lebih kecil.');
+      this.value=''; el('previewWrap').style.display='none'; return;
+    }
+    el('preview').src=URL.createObjectURL(f);
+    el('previewWrap').style.display='block';
+  });
+
+  function resetForm(){
+    el('aduanForm').reset();
+    el('tarikhMasa').value=nowMY();
+    el('manualNameWrap').style.display='none';
+    el('previewWrap').style.display='none';
+    el('receipt').style.display='none';
+    setStatus('');
+  }
+
+  el('btnReset').addEventListener('click',()=>{
+    if(confirm('Kosongkan semua maklumat dalam borang?')) resetForm();
+  });
+
+  window.addEventListener('message',event=>{
+    const d=event.data;
+    if(!d || d.source!=='kkj-gas') return;
+
+    isSubmitting=false;
+    el('btnHantar').disabled=false;
+
+    if(d.ok){
+      setStatus('Laporan berjaya dihantar, direkodkan dan notifikasi e-mel telah diproses.','ok');
+      el('receiptId').textContent=d.aduanId || '';
+      el('receipt').style.display='block';
+
+      // Kosongkan medan aduan tetapi kekalkan resit pada skrin.
+      el('aduanForm').querySelectorAll('input:not([readonly]), textarea').forEach(x=>{
+        if(x.type!=='button' && x.type!=='submit') x.value='';
+      });
+      el('namaPelapor').value='';
+      el('unit').value='';
+      el('jenis').value='';
+      el('keutamaan').value='';
+      el('manualNameWrap').style.display='none';
+      el('previewWrap').style.display='none';
+      el('tarikhMasa').value=nowMY();
+    }else{
+      setStatus('Gagal merekodkan laporan: ' + (d.message || 'Ralat tidak diketahui.'),'danger');
+    }
+  });
+
+  el('aduanForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    if(isSubmitting) return;
+
+    if(GAS_URL.includes('PASTE_WEB_APP_URL_HERE')){
+      setStatus('Tetapan belum lengkap: sila masukkan URL Web App Google Apps Script ke dalam index.html.','danger');
+      return;
+    }
+
+    const nama=selectedNama();
+    if(!nama){
+      setStatus('Sila isi nama pelapor.','danger'); return;
+    }
+
+    isSubmitting=true;
+    el('btnHantar').disabled=true;
+    setStatus('Sedang memproses dan menghantar laporan...','warn');
+
+    try{
+      const file=el('gambar').files[0] || null;
+      const img=await compressImage(file);
+      const aduanId=generateAduanId();
+
+      const gasForm=el('gasPostForm');
+      gasForm.innerHTML='';
+      gasForm.action=GAS_URL;
+
+      const payload={
+        aduanId,
+        tarikhMasa:el('tarikhMasa').value,
+        nama,
+        telefon:el('telefonPelapor').value.trim(),
+        unit:el('unit').value,
+        lokasi:el('lokasi').value.trim(),
+        jenis:el('jenis').value,
+        keutamaan:el('keutamaan').value,
+        keterangan:el('keterangan').value.trim(),
+        namaPegawai:el('namaPegawai').value,
+        emailPegawai:el('emailPegawai').value,
+        imageData:img.data,
+        imageName:img.name,
+        imageType:img.type
+      };
+
+      Object.entries(payload).forEach(([k,v])=>addHidden(gasForm,k,v));
+      gasForm.submit();
+
+      // Jika backend tidak membalas selepas 30 saat, benarkan cuba semula.
+      setTimeout(()=>{
+        if(isSubmitting){
+          isSubmitting=false;
+          el('btnHantar').disabled=false;
+          setStatus('Tiada pengesahan diterima daripada sistem. Semak sambungan internet dan tetapan Web App sebelum cuba semula.','danger');
+        }
+      },30000);
+
+    }catch(err){
+      console.error(err);
+      isSubmitting=false;
+      el('btnHantar').disabled=false;
+      setStatus(err.message || 'Ralat semasa memproses laporan.','danger');
+    }
+  });
 </script>
 </body>
 </html>
